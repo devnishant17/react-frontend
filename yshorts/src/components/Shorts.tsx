@@ -35,7 +35,7 @@ export default function Shorts() {
       </div>
       
 </div>
-<div className="flex bottom-4">
+<div >
 <Icons />
 </div>
 </section>
