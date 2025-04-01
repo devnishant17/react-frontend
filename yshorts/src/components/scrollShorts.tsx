@@ -1,11 +1,8 @@
 import { useState } from "react";
-import { FaMusic, FaMapMarkerAlt, FaChevronUp, FaChevronDown } from "react-icons/fa";
+import { FaMusic, FaMapMarkerAlt } from "react-icons/fa";
 import Icons from "./Icons";
 
 export default function Shorts() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  
   interface Video {
     id: number;
     videoLink: string;
@@ -37,19 +34,24 @@ export default function Shorts() {
     },
   ];
 
-  const nextVideo = () => {
-    setCurrentIndex((prev) => (prev < Videos.length - 1 ? prev + 1 : prev));
-  };
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const prevVideo = () => {
-    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : prev));
+  // Handle scroll event
+  const handleScroll = (event: React.WheelEvent) => {
+    if (event.deltaY > 0) {
+      // Scroll Down
+      setCurrentIndex((prev) => (prev < Videos.length - 1 ? prev + 1 : prev));
+    } else {
+      // Scroll Up
+      setCurrentIndex((prev) => (prev > 0 ? prev - 1 : prev));
+    }
   };
 
   return (
-    <section className="relative justify-center flex w-full h-[600px]">
+    <section className="flex h-[600px] overflow-hidden" onWheel={handleScroll}>
       <div className="flex-col relative w-80 bg-white rounded-xl shadow-lg overflow-hidden">
         {/* Video Placeholder */}
-        <div className="relative w-full h-full  bg-gray-300 flex justify-center items-center">
+        <div className="relative w-full h-full  bg-gray-100 flex justify-center items-center">
           <span className="text-gray-500">{Videos[currentIndex].videoLink}</span>
 
           {/* Overlay Content */}
@@ -79,28 +81,11 @@ export default function Shorts() {
           </div>
         </div>
       </div>
+
       {/* Icons */}
       <div>
         <Icons />
       </div>
-      {/* Navigation Buttons */}
-      <div className="absolute right-2 md:right-20 top-1/2 -translate-y-1/2 flex flex-col items-end gap-5">
-  <button
-    className="p-2 bg-gray-400 text-white rounded-full"
-    onClick={prevVideo}
-    disabled={currentIndex === 0}
-  >
-    <FaChevronUp />
-  </button>
-
-  <button
-    className="p-2 bg-gray-400 text-white rounded-full"
-    onClick={nextVideo}
-    disabled={currentIndex === Videos.length - 1}
-  >
-    <FaChevronDown />
-  </button>
-</div>
     </section>
   );
 }
