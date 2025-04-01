@@ -5,7 +5,7 @@ import Icons from "./Icons";
 export default function Shorts() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  
+
   interface Video {
     id: number;
     videoLink: string;
@@ -34,6 +34,15 @@ export default function Shorts() {
       hashTag: "#22hashtag #lorem #nice",
       bgMusic: "22sound.mp3",
       location: "22new york",
+    },
+    {
+      id: 3,
+      videoLink: "video3.mp4",
+      userName: "dev33",
+      description: "33Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero",
+      hashTag: "#33hashtag #lorem #nice",
+      bgMusic: "s33ound.mp3",
+      location: "33new york",
     },
   ];
 
